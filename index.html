@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b10">
+<meta name="color-scheme" content="dark light">
+<title>Арслан — визитка</title>
+<meta name="description" content="Арслан, 18 лет, Ташкент. Fullstack-разработчик, будущий специалист по кибербезопасности.">
+<script>
+  // Применяем сохранённую тему до отрисовки (без мигания)
+  (function(){
+    var t = 'dark';
+    try { t = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', t);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'light' ? '#eef1f8' : '#0b0b10');
+  })();
+</script>
+<style>
+  :root{
+    --bg:#0b0b10;
+    --glass:rgba(30,30,35,.55);
+    --glass-strong:rgba(30,30,35,.88);
+    --g1:rgba(255,255,255,.10);
+    --g2:rgba(255,255,255,.02);
+    --g3:rgba(255,255,255,.05);
+    --stroke:rgba(255,255,255,.14);
+    --edge:rgba(255,255,255,.18);
+    --text:#f5f5f7;
+    --muted:rgba(245,245,247,.62);
+    --fill-1:rgba(255,255,255,.08);
+    --fill-2:rgba(255,255,255,.15);
+    --ico:#fff;
+    --eyebrow:#64d2ff;
+    --shadow:0 20px 50px -18px rgba(0,0,0,.65);
+    --sheen:rgba(255,255,255,.16);
+    --blob:.55;
+    --name-grad:linear-gradient(120deg,#fff 0%,#cfe6ff 35%,#e6c8ff 65%,#fff 100%);
+    --accent:#0a84ff;
+    --accent2:#bf5af2;
+    --accent3:#64d2ff;
+    --radius:28px;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f8;
+    --glass:rgba(255,255,255,.55);
+    --glass-strong:rgba(255,255,255,.92);
+    --g1:rgba(255,255,255,.75);
+    --g2:rgba(255,255,255,.2);
+    --g3:rgba(255,255,255,.4);
+    --stroke:rgba(0,0,0,.09);
+    --edge:rgba(255,255,255,.95);
+    --text:#1d1d1f;
+    --muted:rgba(29,29,31,.64);
+    --fill-1:rgba(0,0,0,.05);
+    --fill-2:rgba(0,0,0,.09);
+    --ico:#1d1d1f;
+    --eyebrow:#0a6fb3;
+    --shadow:0 20px 50px -22px rgba(40,55,100,.3);
+    --sheen:rgba(255,255,255,.85);
+    --blob:.38;
+    --name-grad:linear-gradient(120deg,#1d1d1f 0%,#0a5fd6 40%,#8e3bd1 70%,#1d1d1f 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.5;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;
+    transition:background-color .5s ease,color .5s ease;
+  }
+  a,button{-webkit-touch-callout:none}
+
+  /* ---------- Фон ---------- */
+  .bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:
+      radial-gradient(1200px 700px at 80% -10%,rgba(10,132,255,.18),transparent 60%),
+      radial-gradient(900px 600px at -10% 110%,rgba(191,90,242,.16),transparent 60%),
+      var(--bg);transition:background-color .5s ease}
+  .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:var(--blob);will-change:transform;transition:opacity .5s}
+  .blob.b1{width:46vmax;height:46vmax;left:-12vmax;top:-10vmax;background:radial-gradient(circle at 30% 30%,var(--accent),transparent 65%);animation:float1 22s ease-in-out infinite}
+  .blob.b2{width:40vmax;height:40vmax;right:-10vmax;top:25vh;background:radial-gradient(circle at 40% 40%,var(--accent2),transparent 65%);animation:float2 26s ease-in-out infinite}
+  .blob.b3{width:34vmax;height:34vmax;left:20vw;bottom:-14vmax;background:radial-gradient(circle at 50% 50%,var(--accent3),transparent 65%);animation:float3 30s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(8vmax,6vmax) scale(1.15)}}
+  @keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-9vmax,-5vmax) scale(.9)}}
+  @keyframes float3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vmax,-7vmax) scale(1.2)}}
+  .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.06;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");}
+
+  /* ---------- Стекло ---------- */
+  .glass{
+    position:relative;
+    background:linear-gradient(135deg,var(--g1),var(--g2) 40%,var(--g3)),var(--glass);
+    -webkit-backdrop-filter:blur(28px) saturate(180%);
+    backdrop-filter:blur(28px) saturate(180%);
+    border:1px solid var(--stroke);
+    border-radius:var(--radius);
+    box-shadow:0 1px 0 var(--edge) inset,var(--shadow);
+    overflow:hidden;isolation:isolate;
+    transition:background-color .5s ease,border-color .5s ease,box-shadow .5s ease;
+  }
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+    .glass{background:var(--glass-strong)}
+  }
+  .glass::before{
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),var(--sheen),transparent 55%);
+    opacity:0;transition:opacity .4s var(--ease);
+  }
+  .glass:hover::before{opacity:1}
+  .glass::after{
+    content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+    background:linear-gradient(120deg,rgba(255,255,255,.5),rgba(255,255,255,0) 30%,rgba(100,210,255,.28) 60%,rgba(191,90,242,.32));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    opacity:.55;
+  }
+
+  /* ---------- Header ---------- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:calc(14px + env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) 0 max(20px,env(safe-area-inset-left));
+    pointer-events:none;
+  }
+  .topbar > *{pointer-events:auto}
+  .brand{
+    display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 18px 0 8px;border-radius:999px;
+    text-decoration:none;color:var(--text);font-weight:650;font-size:16px;letter-spacing:-.01em;
+    animation:fadeDown 1s var(--ease) .3s both;
+  }
+  .brand i{
+    width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:14px;color:#fff;
+    background:conic-gradient(from 210deg,var(--accent),var(--accent2),var(--accent3),var(--accent));
+  }
+  .theme-btn{
+    width:46px;height:46px;border-radius:50%;cursor:pointer;color:var(--text);
+    display:grid;place-items:center;font:inherit;
+    animation:fadeDown 1s var(--ease) .3s both;
+    transition:transform .4s var(--ease);
+  }
+  .theme-btn:hover{transform:scale(1.08)}
+  .theme-btn:active{transform:scale(.92)}
+  .theme-btn svg{grid-area:1/1;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+    transition:transform .6s var(--ease),opacity .4s}
+  .theme-btn .sun{opacity:0;transform:rotate(-90deg) scale(.4)}
+  .theme-btn .moon{opacity:1;transform:none}
+  :root[data-theme="light"] .theme-btn .sun{opacity:1;transform:none}
+  :root[data-theme="light"] .theme-btn .moon{opacity:0;transform:rotate(90deg) scale(.4)}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+
+  nav{
+    position:fixed;top:calc(14px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:55;
+    display:flex;gap:2px;padding:5px;border-radius:999px;height:46px;align-items:center;
+    animation:navIn 1s var(--ease) .3s both;
+  }
+  nav a{
+    color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;
+    padding:8px 15px;border-radius:999px;transition:all .3s var(--ease);white-space:nowrap;
+    display:flex;align-items:center;gap:6px;
+  }
+  nav a svg{display:none;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  nav a:hover{color:var(--text)}
+  nav a.active{color:var(--text);background:var(--fill-2);box-shadow:0 1px 0 var(--edge) inset}
+  @keyframes navIn{from{opacity:0;transform:translate(-50%,-20px)}to{opacity:1;transform:translate(-50%,0)}}
+  @keyframes navInM{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+
+  /* ---------- Layout ---------- */
+  section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:110px 20px 60px;scroll-margin-top:0}
+  .wrap{width:100%;max-width:960px}
+  .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--eyebrow);font-weight:600;margin-bottom:14px}
+  h2{font-size:clamp(30px,5vw,46px);letter-spacing:-.03em;font-weight:700;line-height:1.1;margin-bottom:28px}
+
+  /* ---------- Hero ---------- */
+  #hero{text-align:center;min-height:100vh;min-height:100svh}
+  .hero-card{padding:clamp(34px,7vw,72px) clamp(20px,5vw,64px);max-width:820px;margin:0 auto}
+  .avatar{
+    width:96px;height:96px;margin:0 auto 26px;border-radius:50%;
+    background:conic-gradient(from 210deg,var(--accent),var(--accent2),var(--accent3),var(--accent));
+    display:grid;place-items:center;font-size:40px;font-weight:700;color:#fff;
+    box-shadow:0 0 0 6px var(--fill-1),0 18px 40px -10px rgba(10,132,255,.6);
+    animation:spin-glow 8s linear infinite;
+  }
+  .avatar span{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.45),rgba(255,255,255,0) 55%)}
+  @keyframes spin-glow{0%{filter:hue-rotate(0)}100%{filter:hue-rotate(360deg)}}
+  .hero-name{
+    font-size:clamp(46px,13vw,104px);font-weight:800;letter-spacing:-.045em;line-height:1;
+    background:var(--name-grad);background-size:200% auto;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    animation:shine 6s linear infinite;
+  }
+  @keyframes shine{to{background-position:200% center}}
+  .hero-sub{margin:20px auto 0;font-size:clamp(16px,2.6vw,22px);color:var(--muted);max-width:560px}
+  .hero-sub b{color:var(--text);font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:30px}
+  .chip{
+    font-size:14px;padding:8px 16px;border-radius:999px;color:var(--text);
+    background:var(--fill-1);border:1px solid var(--stroke);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  }
+  .scroll-hint{margin-top:34px;display:inline-flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:13px;text-decoration:none}
+  .scroll-hint i{width:22px;height:36px;border:1.5px solid var(--muted);border-radius:14px;position:relative;opacity:.6}
+  .scroll-hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--text);animation:wheel 1.8s ease-in-out infinite}
+  @keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(12px)}}
+
+  /* ---------- Обо мне ---------- */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+  .about-main{padding:clamp(22px,4vw,40px)}
+  .about-main p{color:var(--muted);font-size:clamp(16px,2vw,18px)}
+  .about-main p+p{margin-top:14px}
+  .about-main strong{color:var(--text);font-weight:600}
+  .facts{display:grid;gap:18px}
+  .fact{padding:20px 22px;display:flex;align-items:center;gap:16px}
+  .ico{width:48px;height:48px;border-radius:15px;flex:none;display:grid;place-items:center;
+    background:linear-gradient(135deg,rgba(10,132,255,.35),rgba(191,90,242,.3));border:1px solid var(--stroke);
+    box-shadow:0 1px 0 var(--edge) inset}
+  .ico svg{width:24px;height:24px;stroke:var(--ico);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .fact small{display:block;color:var(--muted);font-size:13px}
+  .fact b{font-size:18px;font-weight:600;letter-spacing:-.01em}
+
+  /* ---------- Образование ---------- */
+  .edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .edu{padding:26px 24px;display:flex;flex-direction:column;gap:6px;transition:transform .5s var(--ease)}
+  .edu:hover{transform:translateY(-6px)}
+  .edu .ico{margin-bottom:12px}
+  .badge{align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.04em;padding:4px 11px;border-radius:999px;
+    background:var(--fill-1);border:1px solid var(--stroke);color:var(--muted);margin-bottom:6px}
+  .edu h3{font-size:20px;font-weight:650;letter-spacing:-.02em}
+  .edu p{font-size:14.5px;color:var(--muted)}
+  .diploma{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;padding:clamp(22px,4vw,34px);
+    background:linear-gradient(135deg,rgba(10,132,255,.22),rgba(191,90,242,.18) 60%,var(--g3)),var(--glass)}
+  .diploma .ico{width:64px;height:64px;border-radius:20px;margin:0}
+  .diploma .ico svg{width:32px;height:32px}
+  .diploma h3{font-size:clamp(20px,3vw,26px)}
+  .diploma .badge{background:rgba(10,132,255,.2);color:var(--text)}
+  .bar{margin-top:14px;height:6px;border-radius:999px;background:var(--fill-1);overflow:hidden}
+  .bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 1.6s var(--ease) .5s}
+  .diploma.in .bar i{width:12%}
+
+  /* ---------- Интересы ---------- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+  .card{padding:26px 24px;transition:transform .5s var(--ease)}
+  .card:hover{transform:translateY(-6px) scale(1.015)}
+  .card .ico{width:54px;height:54px;border-radius:17px;margin-bottom:18px;background:linear-gradient(135deg,var(--fill-2),var(--fill-1))}
+  .card h3{font-size:19px;font-weight:650;letter-spacing:-.02em;margin-bottom:6px}
+  .card p{font-size:14.5px;color:var(--muted)}
+
+  /* ---------- Контакты ---------- */
+  #contacts{text-align:center}
+  .contact-card{padding:clamp(32px,6vw,64px) clamp(18px,5vw,56px);max-width:720px;margin:0 auto}
+  .contact-card p{color:var(--muted);font-size:clamp(16px,2.2vw,18px);margin:-8px auto 30px;max-width:460px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-weight:600;font-size:17px;color:#fff;
+    min-height:52px;padding:14px 32px;border-radius:999px;
+    background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0) 50%),linear-gradient(135deg,#0a84ff,#5e5ce6);
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 14px 34px -10px rgba(10,132,255,.8);
+    transition:transform .4s var(--ease),filter .3s;
+  }
+  .btn:hover{transform:translateY(-3px) scale(1.03);filter:brightness(1.1)}
+  .btn:active{transform:scale(.97)}
+  .btn svg{width:20px;height:20px;fill:currentColor}
+  .socials{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:24px}
+  .social{
+    display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-size:15px;font-weight:500;
+    min-height:46px;padding:10px 20px;border-radius:999px;background:var(--fill-1);border:1px solid var(--stroke);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:all .35s var(--ease);
+  }
+  .social:hover{background:var(--fill-2);transform:translateY(-2px)}
+  .social svg{width:18px;height:18px;fill:currentColor}
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:10px 20px 40px}
+
+  /* ---------- Появление ---------- */
+  .reveal{opacity:0;transform:translateY(34px) scale(.98);filter:blur(8px);
+    transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease),background-color .5s,border-color .5s;
+    transition-delay:var(--d,0s)}
+  .reveal.in{opacity:1;transform:none;filter:none}
+  .hero-in{opacity:0;transform:translateY(24px);filter:blur(10px);animation:heroIn 1.1s var(--ease) forwards;animation-delay:var(--d,0s)}
+  @keyframes heroIn{to{opacity:1;transform:none;filter:none}}
+
+  /* ---------- Планшет ---------- */
+  @media (max-width:900px){
+    .edu-grid{grid-template-columns:1fr 1fr}
+    nav a{padding:8px 11px;font-size:13px}
+    .brand span{display:none}
+    .brand{padding:0 8px}
+  }
+
+  /* ---------- Телефон ---------- */
+  @media (max-width:760px){
+    :root{--radius:24px}
+    body{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+    section{min-height:auto;padding:84px 16px 36px}
+    #hero{min-height:100svh;padding-top:90px;padding-bottom:110px}
+    .brand span{display:inline}
+    .brand{padding:0 16px 0 8px}
+    h2{margin-bottom:20px}
+
+    /* нижняя панель в стиле iOS */
+    nav{
+      top:auto;bottom:calc(12px + env(safe-area-inset-bottom));left:12px;right:12px;transform:none;
+      height:auto;padding:6px;justify-content:space-between;border-radius:30px;animation-name:navInM;
+    }
+    nav a{flex:1;flex-direction:column;gap:2px;padding:8px 2px;font-size:10.5px;border-radius:24px;min-width:0}
+    nav a svg{display:block}
+    nav a span{overflow:hidden;text-overflow:ellipsis;max-width:100%}
+
+    .about-grid{grid-template-columns:1fr}
+    .facts{gap:14px}
+    .edu-grid{grid-template-columns:1fr}
+    .diploma{grid-template-columns:1fr;gap:14px}
+    .cards{grid-template-columns:1fr 1fr;gap:12px}
+    .card{padding:20px 16px}
+    .card .ico{width:46px;height:46px;border-radius:14px;margin-bottom:14px}
+    .card h3{font-size:17px}
+    .card p{font-size:13.5px}
+    .btn{width:100%}
+    .social{flex:1 1 calc(50% - 12px);justify-content:center}
+    .chip{font-size:13px;padding:7px 13px}
+
+    /* легче для GPU */
+    .glass{-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%)}
+    .blob{filter:blur(50px)}
+    .grain{display:none}
+  }
+  @media (max-width:380px){
+    .cards{grid-template-columns:1fr}
+    nav a{font-size:9.5px}
+    .social{flex-basis:100%}
+  }
+  /* Нет hover на сенсорных экранах */
+  @media (hover:none){
+    .card:hover,.edu:hover,.social:hover,.btn:hover{transform:none}
+    .glass:hover::before{opacity:0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .reveal,.hero-in{opacity:1;transform:none;filter:none}
+    .diploma .bar i{width:12%}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header class="topbar">
+  <a class="brand glass" href="#hero" aria-label="На главную"><i>А</i><span>Арслан</span></a>
+  <button class="theme-btn glass" id="themeBtn" type="button" aria-label="Переключить тему" title="Тёмная / светлая тема">
+    <svg class="moon" viewBox="0 0 24 24"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2z"/></svg>
+    <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+  </button>
+</header>
+
+<nav class="glass" aria-label="Навигация">
+  <a href="#hero" class="active"><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9z"/></svg><span>Главная</span></a>
+  <a href="#about"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>Обо мне</span></a>
+  <a href="#education"><svg viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5L2 9z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.500M22 9v6"/></svg><span>Учёба</span></a>
+  <a href="#interests"><svg viewBox="0 0 24 24"><path d="m12 3 2.700 5.600 6.100.9-4.400 4.300 1 6.100L12 17l-5.400 2.900 1-6.100L3.200 9.500l6.100-.9L12 3z"/></svg><span>Интересы</span></a>
+  <a href="#contacts"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.500 7.500 8.500 6 8.500-6"/></svg><span>Контакты</span></a>
+</nav>
+
+<main>
+  <!-- 1. HERO -->
+  <section id="hero">
+    <div class="wrap">
+      <div class="glass hero-card">
+        <div class="avatar hero-in" style="--d:.2s"><span>А</span></div>
+        <h1 class="hero-name hero-in" style="--d:.4s">Арслан</h1>
+        <p class="hero-sub hero-in" style="--d:.6s">
+          Мне 18. Я <b>fullstack-разработчик</b> из Ташкента и&nbsp;будущий специалист по <b>кибербезопасности</b>.
+        </p>
+        <div class="chips hero-in" style="--d:.8s">
+          <span class="chip">Ташкент, Узбекистан</span>
+          <span class="chip">Python</span>
+          <span class="chip">C#</span>
+          <span class="chip">Web</span>
+        </div>
+        <a class="scroll-hint hero-in" style="--d:1s" href="#about" aria-label="Прокрутить вниз"><i></i>Листай вниз</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ОБО МНЕ -->
+  <section id="about">
+    <div class="wrap">
+      <div class="eyebrow reveal">Обо мне</div>
+      <h2 class="reveal" style="--d:.08s">Привет, я Арслан</h2>
+      <div class="about-grid">
+        <div class="glass about-main reveal" style="--d:.16s">
+          <p>Мне <strong>18 лет</strong>, я живу в <strong>Ташкенте, Узбекистан</strong>. Создаю сайты от идеи до запуска — и фронтенд, и бэкенд.</p>
+          <p>Пишу на <strong>Python</strong> и <strong>C#</strong>. Сейчас планирую погрузиться в <strong>кибербезопасность</strong> и научиться защищать системы.</p>
+        </div>
+        <div class="facts">
+          <div class="glass fact reveal" style="--d:.24s">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.500A7 7 0 0 1 19 9.500C19 14.800 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></svg></div>
+            <div><small>Откуда</small><b>Ташкент, Узбекистан</b></div>
+          </div>
+          <div class="glass fact reveal" style="--d:.32s">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/></svg></div>
+            <div><small>Занимаюсь</small><b>Fullstack-разработка</b></div>
+          </div>
+          <div class="glass fact reveal" style="--d:.4s">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.500 3 8 7 10 4-2 7-5.500 7-10V6l-7-3z"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <div><small>Цель</small><b>Кибербезопасность</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ОБРАЗОВАНИЕ -->
+  <section id="education">
+    <div class="wrap">
+      <div class="eyebrow reveal">Образование</div>
+      <h2 class="reveal" style="--d:.08s">Курсы и диплом</h2>
+      <div class="edu-grid">
+        <article class="glass edu reveal" style="--d:.12s">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2.500"/><path d="M8 20h8M12 16v4"/></svg></div>
+          <span class="badge">Курс</span>
+          <h3>Intro to IT</h3>
+          <p>Основы информационных технологий.</p>
+        </article>
+        <article class="glass edu reveal" style="--d:.2s">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="m12 3 8 4.500v9L12 21l-8-4.500v-9L12 3z"/><path d="m4 7.500 8 4.500 8-4.500M12 12v9"/></svg></div>
+          <span class="badge">Курс</span>
+          <h3>OOP</h3>
+          <p>Объектно-ориентированное программирование.</p>
+        </article>
+        <article class="glass edu reveal" style="--d:.28s">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5.500A2.500 2.500 0 0 1 6.500 3H20v15H6.500A2.500 2.500 0 0 0 4 20.500v-15z"/><path d="M4 20.500A2.500 2.500 0 0 0 6.500 23H20v-5"/></svg></div>
+          <span class="badge">Курс</span>
+          <h3>Курс 1</h3>
+          <p>Название и описание курса — [подставь свои].</p>
+        </article>
+        <article class="glass edu diploma reveal" id="diploma" style="--d:.2s">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5L2 9z"/><path d="M6 11.500V16c0 1.400 2.700 3 6 3s6-1.600 6-3v-4.500M22 9v6"/></svg></div>
+          <div>
+            <span class="badge">Будущий диплом</span>
+            <h3>Computer Science &amp; Software Engineering</h3>
+            <p>Учебное заведение: [указать] · Год выпуска: [указать]</p>
+            <div class="bar" aria-hidden="true"><i></i></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ИНТЕРЕСЫ -->
+  <section id="interests">
+    <div class="wrap">
+      <div class="eyebrow reveal">Интересы</div>
+      <h2 class="reveal" style="--d:.08s">Что меня увлекает</h2>
+      <div class="cards">
+        <article class="glass card reveal" style="--d:.12s">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M5 16V12l2-5h10l2 5v4"/><path d="M3 16h18v2.500a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V17H7v1.500a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V16z"/><circle cx="7.500" cy="13.200" r=".6"/><circle cx="16.500" cy="13.200" r=".6"/></svg></div>
+          <h3>Автомобили</h3>
+          <p>Люблю машины: дизайн, техника, скорость и характер каждой модели.</p>
+        </article>
+        <article class="glass card reveal" style="--d:.2s">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.500 3 8 7 10 4-2 7-5.500 7-10V6l-7-3z"/><path d="M12 10v3M12 15.500v.01"/></svg></div>
+          <h3>Кибербезопасность</h3>
+          <p>Хочу разбираться, как ломают и как защищают системы.</p>
+        </article>
+        <article class="glass card reveal" style="--d:.28s">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2.500"/><path d="M3 9h18M8 21h8M12 18v3"/></svg></div>
+          <h3>Веб-разработка</h3>
+          <p>Создаю сайты и веб-приложения: от интерфейса до серверной части.</p>
+        </article>
+        <article class="glass card reveal" style="--d:.36s">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="m9 8-4 4 4 4M15 8l4 4-4 4"/></svg></div>
+          <h3>Python и C#</h3>
+          <p>Мои основные языки — для автоматизации, бэкенда и новых идей.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. КОНТАКТЫ -->
+  <section id="contacts">
+    <div class="wrap">
+      <div class="glass contact-card reveal">
+        <div class="eyebrow">Контакты</div>
+        <h2>Давай на связи</h2>
+        <p>Есть идея, вопрос или проект? Напиши — отвечу.</p>
+        <a class="btn" href="https://t.me/twelxemvd" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M9.780 18.650l.280-4.230 7.680-6.920c.340-.310-.070-.460-.520-.190L7.740 13.300 3.640 12c-.880-.250-.890-.860.200-1.300l15.970-6.160c.730-.330 1.430.180 1.150 1.300l-2.720 12.810c-.190.910-.740 1.130-1.500.710L12.600 16.300l-1.990 1.930c-.230.230-.420.420-.830.420z"/></svg>
+          Написать мне
+        </a>
+        <div class="socials">
+          <a class="social" href="https://t.me/twelxemvd" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M9.780 18.650l.280-4.230 7.680-6.920c.340-.310-.070-.460-.520-.190L7.740 13.300 3.640 12c-.880-.250-.890-.860.200-1.300l15.970-6.160c.730-.330 1.430.180 1.150 1.300l-2.720 12.810c-.190.910-.740 1.130-1.500.710L12.600 16.300l-1.990 1.930c-.230.230-.420.420-.830.420z"/></svg>
+            Telegram
+          </a>
+          <a class="social" href="https://github.com/twelxemvd" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 16 16"><path d="M8 0C3.580 0 0 3.580 0 8c0 3.540 2.290 6.530 5.470 7.590.4.070.55-.170.55-.380 0-.190-.010-.820-.010-1.490-2.010.370-2.530-.490-2.690-.940-.090-.230-.480-.940-.820-1.130-.280-.150-.680-.520-.010-.530.630-.010 1.080.580 1.230.820.720 1.210 1.870.870 2.330.660.070-.520.280-.870.510-1.070-1.780-.2-3.640-.890-3.640-3.950 0-.870.310-1.590.820-2.150-.080-.2-.360-1.020.080-2.120 0 0 .670-.210 2.200.820.640-.180 1.320-.270 2-.270.680 0 1.360.090 2 .270 1.530-1.040 2.200-.820 2.200-.820.440 1.100.160 1.920.080 2.120.510.560.820 1.270.820 2.150 0 3.070-1.870 3.750-3.650 3.950.290.250.540.730.540 1.480 0 1.070-.010 1.930-.010 2.200 0 .210.150.460.550.380A8.013 8.013 0 0 0 16 8c0-4.420-3.580-8-8-8z"/></svg>
+            GitHub
+          </a>
+          <!-- Пустышка: ведёт на главную LinkedIn. Замени ссылку на свой профиль -->
+          <a class="social" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M20.450 20.450h-3.560v-5.570c0-1.330-.030-3.040-1.850-3.040-1.860 0-2.140 1.450-2.140 2.940v5.670H9.350V9h3.410v1.560h.050c.480-.900 1.640-1.850 3.370-1.850 3.600 0 4.270 2.370 4.270 5.450v6.290zM5.340 7.430a2.060 2.060 0 1 1 0-4.120 2.060 2.060 0 0 1 0 4.120zM7.120 20.450H3.560V9h3.560v11.450z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="year">2026</span> Арслан · Ташкент</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Переключение темы
+  (function(){
+    var root = document.documentElement;
+    var meta = document.querySelector('meta[name="theme-color"]');
+    document.getElementById('themeBtn').addEventListener('click', function(){
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      if (meta) meta.setAttribute('content', next === 'light' ? '#eef1f8' : '#0b0b10');
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  })();
+
+  // Появление элементов при скролле
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+
+  // Активный пункт навигации
+  (function(){
+    var links = document.querySelectorAll('nav a');
+    var map = {};
+    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          links.forEach(function(a){ a.classList.remove('active'); });
+          if (map[e.target.id]) map[e.target.id].classList.add('active');
+        }
+      });
+    }, { threshold: 0.35, rootMargin: '-10% 0px -30% 0px' });
+    document.querySelectorAll('main section').forEach(function(s){ io.observe(s); });
+  })();
+
+  // Блик стекла за курсором
+  (function(){
+    if (window.matchMedia && window.matchMedia('(hover:none)').matches) return;
+    document.querySelectorAll('.glass').forEach(function(el){
+      el.addEventListener('pointermove', function(e){
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  })();
+</script>
+</body>
+</html>
